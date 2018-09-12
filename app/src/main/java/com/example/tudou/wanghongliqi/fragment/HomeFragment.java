@@ -1,5 +1,6 @@
 package com.example.tudou.wanghongliqi.fragment;
 
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.View;
@@ -18,7 +19,7 @@ import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 import butterknife.BindView;
 
 /**
- * A simple {@link Fragment} subclass.
+ * 图片
  */
 public class HomeFragment extends BaseFragment implements RefreshLayout.OnRefreshListener {
 
@@ -30,6 +31,10 @@ public class HomeFragment extends BaseFragment implements RefreshLayout.OnRefres
         // Required empty public constructor
     }
 
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+
+    }
 
     @Override
     protected int getViewResId() {
@@ -50,18 +55,17 @@ public class HomeFragment extends BaseFragment implements RefreshLayout.OnRefres
     private void checkVersion() {
         HttpOnNextListener httpOnNextListener = new HttpOnNextListener<String>() {
             @Override
-            public void onNext(String method,String s) {
+            public void onNext(String method, String s) {
 
                 Log.e("登录111", "onNext: " + DesUtil.decrypt(s));
                 rlf.endRefresh();
 
 
-
             }
 
             @Override
-            public void onError(String method,Throwable e) {
-                super.onError(method,e);
+            public void onError(String method, Throwable e) {
+                super.onError(method, e);
                 rlf.endRefresh();
 
             }
@@ -69,9 +73,7 @@ public class HomeFragment extends BaseFragment implements RefreshLayout.OnRefres
         };
 
         HttpManager instance = HttpManager.getInstance();
-        ProgressSubscriber progressSubscriber = instance.doHttpDealString(new VersionPostApi("AddSignIn",new Login("Mobile", "13632840502", "123456"),httpOnNextListener, (RxAppCompatActivity) getActivity()), "加载中" + 111);
-
-
+        ProgressSubscriber progressSubscriber = instance.doHttpDealString(new VersionPostApi("AddSignIn", new Login("Mobile", "13632840502", "123456"), httpOnNextListener, (RxAppCompatActivity) getActivity()), "加载中" + 111);
 
 
     }

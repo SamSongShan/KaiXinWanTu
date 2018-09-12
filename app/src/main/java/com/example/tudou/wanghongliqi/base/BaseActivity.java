@@ -36,7 +36,8 @@ public abstract class BaseActivity extends RxAppCompatActivity {
         ActivityStackManager.getManager().addActivity(this);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);//手机竖屏
 
-        setContentView(getViewResId());if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        setContentView(getViewResId());
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             StatusBarUtils.setStatusBarLightMode(this, Color.WHITE);
         }
 

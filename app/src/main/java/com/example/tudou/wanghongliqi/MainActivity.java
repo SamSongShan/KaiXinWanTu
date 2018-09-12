@@ -3,6 +3,7 @@ package com.example.tudou.wanghongliqi;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
@@ -34,12 +35,16 @@ import com.example.tudou.wanghongliqi.base.listener.upload.ProgressRequestBody;
 import com.example.tudou.wanghongliqi.base.listener.upload.UploadProgressListener;
 import com.example.tudou.wanghongliqi.base.subscribers.ProgressSubscriber;
 import com.example.tudou.wanghongliqi.custom.DownloadDialog;
+import com.example.tudou.wanghongliqi.fragment.Home2Fragment;
 import com.example.tudou.wanghongliqi.fragment.HomeFragment;
+import com.example.tudou.wanghongliqi.fragment.Video2Fragment;
+import com.example.tudou.wanghongliqi.fragment.VideoFragment;
 import com.example.tudou.wanghongliqi.model.Login;
 import com.example.tudou.wanghongliqi.utils.DesUtil;
 import com.example.tudou.wanghongliqi.utils.LogUtils;
 import com.example.tudou.wanghongliqi.utils.PermissionsUtil;
 import com.example.tudou.wanghongliqi.utils.PhoneUtil;
+import com.example.tudou.wanghongliqi.utils.StatusBarUtils;
 import com.example.tudou.wanghongliqi.utils.ToastUtil;
 
 import java.io.File;
@@ -74,6 +79,9 @@ public class MainActivity extends BaseActivity implements PermissionsUtil.CheckV
     private FragmentManager fragmentManager;
     private HomeFragment homeFragment;
     private int page;//要启动的Fragment的页数
+    private Home2Fragment home2Fragment;
+    private VideoFragment videoFragment;
+    private Video2Fragment video2Fragment;
 
     @Override
     protected int getViewResId() {
@@ -83,16 +91,19 @@ public class MainActivity extends BaseActivity implements PermissionsUtil.CheckV
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void init() {
+        StatusBarUtils.translucentStatusBar(this);
+        StatusBarUtils.setStatusBarLightMode(this, Color.WHITE);
+
         radioGroup.setOnCheckedChangeListener(this);
         radioGroup.getChildAt(0).performClick();
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            PermissionsUtil.checkPermissions(this, this, 0, 1, 2, 3, 4, 5, 6, 7, 8);
-            downLoadApp();
-           // uploadeDo();
+            PermissionsUtil.checkPermissions(this, this, 0, 2);
+            //downLoadApp();
+            // uploadeDo();
         } else {
             checkVersion();
-            downLoadApp();
+            //downLoadApp();
             //uploadeDo();
 
         }
@@ -105,7 +116,7 @@ public class MainActivity extends BaseActivity implements PermissionsUtil.CheckV
     private void checkVersion() {
         HttpOnNextListener httpOnNextListener = new HttpOnNextListener<String>() {
             @Override
-            public void onNext(String method,String s) {
+            public void onNext(String method, String s) {
 
                 Log.e("登录111", "onNext: " + DesUtil.decrypt(s));
                 //viewById.endRefresh();
@@ -116,8 +127,8 @@ public class MainActivity extends BaseActivity implements PermissionsUtil.CheckV
             }
 
             @Override
-            public void onError(String method,Throwable e) {
-                super.onError(method,e);
+            public void onError(String method, Throwable e) {
+                super.onError(method, e);
 
 
             }
@@ -125,7 +136,7 @@ public class MainActivity extends BaseActivity implements PermissionsUtil.CheckV
         };
 
         HttpManager instance = HttpManager.getInstance();
-        ProgressSubscriber progressSubscriber = instance.doHttpDealString(new VersionPostApi("AddSignIn",new Login("Mobile", "13632840502", "123456"),httpOnNextListener, MainActivity.this), "加载中" + 111);
+        ProgressSubscriber progressSubscriber = instance.doHttpDealString(new VersionPostApi("AddSignIn", new Login("Mobile", "13632840502", "123456"), httpOnNextListener, MainActivity.this), "加载中" + 111);
 
 
         // downLoadApp();
@@ -364,14 +375,14 @@ public class MainActivity extends BaseActivity implements PermissionsUtil.CheckV
      */
     HttpOnNextListener httpOnNextListener = new HttpOnNextListener<String>() {
         @Override
-        public void onNext(String method,String o) {
+        public void onNext(String method, String o) {
 
             LogUtils.e("上传回调onNext", DesUtil.decrypt(o));
         }
 
         @Override
-        public void onError(String method,Throwable e) {
-            super.onError( method,e);
+        public void onError(String method, Throwable e) {
+            super.onError(method, e);
             LogUtils.e("上传回调onError", e.getMessage());
 
         }
@@ -416,7 +427,13 @@ public class MainActivity extends BaseActivity implements PermissionsUtil.CheckV
                 break;
             case R.id.rb_mainTab1://视频
                 page = 1;
-
+                if (videoFragment == null) {
+                    videoFragment = new VideoFragment();
+                    transaction.add(R.id.fl_main, videoFragment, "1");
+                } else {
+                    transaction.show(videoFragment);
+                    //findFragment.onRefresh();//强制进入刷新
+                }
                 break;
             case R.id.rb_mainTab2://暂无展位用
 
@@ -425,11 +442,25 @@ public class MainActivity extends BaseActivity implements PermissionsUtil.CheckV
 
             case R.id.rb_mainTab3://消息
                 page = 3;
-
+                if (home2Fragment == null) {
+                    home2Fragment = new Home2Fragment();
+                    transaction.add(R.id.fl_main, home2Fragment, "3");
+                } else {
+                    transaction.show(home2Fragment);
+                    //findFragment.onRefresh();//强制进入刷新
+                }
                 break;
             case R.id.rb_mainTab4://我的
                 page = 4;
-                startActivity(new Intent(this,DemoActivity.class));
+
+                if (video2Fragment == null) {
+                    video2Fragment = new Video2Fragment();
+                    transaction.add(R.id.fl_main, video2Fragment, "4");
+                } else {
+                    transaction.show(video2Fragment);
+                    //findFragment.onRefresh();//强制进入刷新
+                }
+                // startActivity(new Intent(this,DemoActivity.class));
 
                 break;
         }
@@ -442,6 +473,15 @@ public class MainActivity extends BaseActivity implements PermissionsUtil.CheckV
     private void hideFragments(FragmentTransaction transaction) {
         if (homeFragment != null) {
             transaction.hide(homeFragment);
+        }
+        if (home2Fragment != null) {
+            transaction.hide(home2Fragment);
+        }
+        if (videoFragment != null) {
+            transaction.hide(videoFragment);
+        }
+        if (video2Fragment != null) {
+            transaction.hide(video2Fragment);
         }
 
     }
