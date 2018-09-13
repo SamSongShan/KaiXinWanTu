@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="tool_bar_top_padding">22dp</dimen>
+    <dimen name="tool_bar_top_padding">24dp</dimen>
+
+    <dimen name="cardview_elevation">10dp</dimen>
+    <dimen name="toolbar_top">0dp</dimen>
     <dimen name="tool_bar_top_margin">0dp</dimen>
+
 </resources>

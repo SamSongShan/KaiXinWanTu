@@ -38,7 +38,7 @@ public abstract class BaseActivity extends RxAppCompatActivity {
 
         setContentView(getViewResId());
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            StatusBarUtils.setStatusBarLightMode(this, Color.WHITE);
+            //StatusBarUtils.setStatusBarLightMode(this, Color.WHITE);
         }
 
         unbinder = ButterKnife.bind(this);

@@ -177,4 +177,6 @@ public abstract class BaseFragment extends RxFragment {
 
         return statusLayoutManager;
     }
+
+
 }

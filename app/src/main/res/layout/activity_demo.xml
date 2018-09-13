@@ -5,8 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/colorBg"
+    android:background="@color/colorWhite"
     tools:context=".activity.DemoActivity">
+    <LinearLayout
+        android:id="@+id/ll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/mine_bg"
+        android:orientation="vertical">
+    </LinearLayout>
     <include layout="@layout/toolbar_right_text"/>
 
 </LinearLayout>

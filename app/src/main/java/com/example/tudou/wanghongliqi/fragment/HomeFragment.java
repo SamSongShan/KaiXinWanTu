@@ -1,5 +1,6 @@
 package com.example.tudou.wanghongliqi.fragment;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -14,6 +15,8 @@ import com.example.tudou.wanghongliqi.base.subscribers.ProgressSubscriber;
 import com.example.tudou.wanghongliqi.custom.RefreshLayout;
 import com.example.tudou.wanghongliqi.model.Login;
 import com.example.tudou.wanghongliqi.utils.DesUtil;
+import com.example.tudou.wanghongliqi.utils.StatusBarUtil;
+import com.example.tudou.wanghongliqi.utils.StatusBarUtils;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 
 import butterknife.BindView;
@@ -43,12 +46,17 @@ public class HomeFragment extends BaseFragment implements RefreshLayout.OnRefres
 
     @Override
     protected void init(View v) {
+      // StatusBarUtils.setStatusBarLightMode(getActivity(), Color.WHITE);
+        StatusBarUtil.setLightMode(getActivity());
         rlf.setOnRefreshListener(this);
 
     }
 
     @Override
     public void onRefresh() {
+        //StatusBarUtils.setStatusBarLightMode(getActivity(), Color.WHITE);
+        StatusBarUtil.setLightMode(getActivity());
+
         checkVersion();
     }
 

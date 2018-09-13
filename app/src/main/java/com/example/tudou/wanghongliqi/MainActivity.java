@@ -91,9 +91,6 @@ public class MainActivity extends BaseActivity implements PermissionsUtil.CheckV
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void init() {
-        StatusBarUtils.translucentStatusBar(this);
-        StatusBarUtils.setStatusBarLightMode(this, Color.WHITE);
-
         radioGroup.setOnCheckedChangeListener(this);
         radioGroup.getChildAt(0).performClick();
 
@@ -422,7 +419,7 @@ public class MainActivity extends BaseActivity implements PermissionsUtil.CheckV
                     transaction.add(R.id.fl_main, homeFragment, "0");
                 } else {
                     transaction.show(homeFragment);
-                    //findFragment.onRefresh();//强制进入刷新
+                    homeFragment.onRefresh();//强制进入刷新
                 }
                 break;
             case R.id.rb_mainTab1://视频
@@ -432,7 +429,7 @@ public class MainActivity extends BaseActivity implements PermissionsUtil.CheckV
                     transaction.add(R.id.fl_main, videoFragment, "1");
                 } else {
                     transaction.show(videoFragment);
-                    //findFragment.onRefresh();//强制进入刷新
+                    videoFragment.onRefresh();//强制进入刷新
                 }
                 break;
             case R.id.rb_mainTab2://暂无展位用
@@ -447,7 +444,7 @@ public class MainActivity extends BaseActivity implements PermissionsUtil.CheckV
                     transaction.add(R.id.fl_main, home2Fragment, "3");
                 } else {
                     transaction.show(home2Fragment);
-                    //findFragment.onRefresh();//强制进入刷新
+                    home2Fragment.onRefresh();//强制进入刷新
                 }
                 break;
             case R.id.rb_mainTab4://我的
@@ -458,9 +455,9 @@ public class MainActivity extends BaseActivity implements PermissionsUtil.CheckV
                     transaction.add(R.id.fl_main, video2Fragment, "4");
                 } else {
                     transaction.show(video2Fragment);
-                    //findFragment.onRefresh();//强制进入刷新
+                    video2Fragment.onRefresh();//强制进入刷新
                 }
-                // startActivity(new Intent(this,DemoActivity.class));
+                 startActivity(new Intent(this,DemoActivity.class));
 
                 break;
         }
