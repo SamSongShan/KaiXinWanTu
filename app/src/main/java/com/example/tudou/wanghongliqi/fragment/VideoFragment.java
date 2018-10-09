@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 
 import com.example.tudou.wanghongliqi.R;
 import com.example.tudou.wanghongliqi.base.BaseFragment;
+import com.example.tudou.wanghongliqi.utils.StatusBarUtil;
 import com.example.tudou.wanghongliqi.utils.StatusBarUtils;
 
 /**
@@ -23,10 +24,12 @@ public class VideoFragment extends BaseFragment {
     }
     @Override
     protected void init(View v) {
-       StatusBarUtils.setStatusBarLightMode(getActivity(), Color.WHITE);
+        StatusBarUtil.setTranslucentForImageViewInFragment(getActivity(), null);
+    }
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
 
     }
-
 
     @Override
     protected int getViewResId() {
@@ -34,7 +37,6 @@ public class VideoFragment extends BaseFragment {
     }
 
     public void onRefresh() {
-       StatusBarUtils.setStatusBarLightMode(getActivity(), Color.WHITE);
-
+        StatusBarUtil.setTranslucentForImageViewInFragment(getActivity(), null);
     }
 }

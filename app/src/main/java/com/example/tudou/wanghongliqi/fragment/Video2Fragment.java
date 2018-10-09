@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 
 import com.example.tudou.wanghongliqi.R;
 import com.example.tudou.wanghongliqi.base.BaseFragment;
+import com.example.tudou.wanghongliqi.utils.StatusBarUtil;
 import com.example.tudou.wanghongliqi.utils.StatusBarUtils;
 
 /**
@@ -22,7 +23,10 @@ public class Video2Fragment extends BaseFragment {
         // Required empty public constructor
     }
 
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
 
+    }
     @Override
     protected int getViewResId() {
         return R.layout.fragment_video2;
@@ -30,12 +34,12 @@ public class Video2Fragment extends BaseFragment {
 
     @Override
     protected void init(View v) {
-        StatusBarUtils.setStatusBarLightMode(getActivity(), Color.WHITE);
+        StatusBarUtil.setLightMode(getActivity());
 
     }
 
     public void onRefresh() {
-        StatusBarUtils.setStatusBarLightMode(getActivity(), Color.WHITE);
+        StatusBarUtil.setLightMode(getActivity());
 
     }
 }

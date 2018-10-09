@@ -2,7 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    android:fitsSystemWindows="true"
 
     >
     <LinearLayout
@@ -15,10 +16,8 @@
 
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:background="@color/colorWhite"
             android:paddingBottom="5dp"
-            android:paddingTop="@dimen/tool_bar_top_padding"
             android:src="@drawable/home_logo" />
     </LinearLayout>
 <com.example.tudou.wanghongliqi.custom.RefreshLayout

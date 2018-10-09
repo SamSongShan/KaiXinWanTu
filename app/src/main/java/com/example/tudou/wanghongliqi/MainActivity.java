@@ -99,7 +99,7 @@ public class MainActivity extends BaseActivity implements PermissionsUtil.CheckV
             //downLoadApp();
             // uploadeDo();
         } else {
-            checkVersion();
+           // checkVersion();
             //downLoadApp();
             //uploadeDo();
 
@@ -292,7 +292,7 @@ public class MainActivity extends BaseActivity implements PermissionsUtil.CheckV
 
     @Override
     public void checkVersionSuccess() {//授权成功
-        checkVersion();
+      //  checkVersion();
     }
 
     @Override
