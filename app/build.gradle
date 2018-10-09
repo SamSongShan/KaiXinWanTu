@@ -5,14 +5,14 @@ android {
     compileSdkVersion 27
     buildToolsVersion "27.0.3"
 
-     signingConfigs {
-         config {
-             keyAlias 'villaday'
-             keyPassword 'zlct123456villaday'
-             storeFile file('E:/Android/villaday.jks')
-             storePassword 'zlct123456'
-         }
-    }
+    /* signingConfigs {
+        config {
+            keyAlias 'CBao'
+            keyPassword '654321zlct'
+            storeFile file('E:/Android/CanBao.jks')
+            storePassword 'zlct123456'
+        }
+    }*/
     lintOptions {
         disable 'MissingTranslation'
 
@@ -42,12 +42,12 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.config
+            //signingConfig signingConfigs.config
         }
         debug {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.config
+            //signingConfig signingConfigs.config
         }
     }
 }
@@ -74,8 +74,9 @@ dependencies {
 
 
     compile project(path: ':empty')
-    compile 'com.android.support:appcompat-v7:27.1.0'
-    compile 'com.android.support:design:27.1.0'
+    compile 'com.android.support:support-v4:27.0.2'
+    compile 'com.android.support:appcompat-v7:27.0.2'
+    compile 'com.android.support:design:26.+'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.squareup.retrofit2:retrofit:2.4.0'
     compile 'com.squareup.retrofit2:converter-gson:2.4.0'
