@@ -48,6 +48,7 @@ public class HomeFragment extends BaseFragment implements RefreshLayout.OnRefres
     protected void init(View v) {
       // StatusBarUtils.setStatusBarLightMode(getActivity(), Color.WHITE);
         StatusBarUtil.setLightMode(getActivity());
+
         rlf.setOnRefreshListener(this);
 
     }
