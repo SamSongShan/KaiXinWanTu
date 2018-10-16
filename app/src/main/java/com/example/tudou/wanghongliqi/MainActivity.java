@@ -91,6 +91,7 @@ public class MainActivity extends BaseActivity implements PermissionsUtil.CheckV
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void init() {
+
         radioGroup.setOnCheckedChangeListener(this);
         radioGroup.getChildAt(0).performClick();
 
